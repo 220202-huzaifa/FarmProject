@@ -5,7 +5,7 @@
     "scripts": {
         "build": "vite build",
         "dev": "vite",
-        "vercel-build": "npm run build"
+        "vercel-build": "npm install --no-optional && npm run build"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
