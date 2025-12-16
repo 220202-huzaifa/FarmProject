@@ -1,3 +1,4 @@
+import React from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
