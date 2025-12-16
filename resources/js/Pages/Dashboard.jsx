@@ -4,7 +4,7 @@ import { Head, usePage, Link } from '@inertiajs/react';
 import { TrendingUp, DollarSign, Users, AlertCircle, Droplet, ShoppingCart, PlusCircle, Calendar } from 'lucide-react';
 
 export default function Dashboard() {
-    const { todayProduction, recentProductions } = usePage().props;
+    const { todayProduction, todaySales, recentProductions } = usePage().props;
 
     const stats = [
         {
@@ -18,7 +18,7 @@ export default function Dashboard() {
         },
         {
             name: "Today's Sales",
-            value: todaySales ? `$${parseFloat(todaySales.sale_amount).toFixed(2)}` : "$0",
+            value: todaySales ? `Rs. ${parseFloat(todaySales.sale_amount).toFixed(2)}` : "Rs. 0",
             change: todaySales ? "Recorded" : "Not recorded",
             changeType: todaySales ? "increase" : "neutral",
             icon: DollarSign,
@@ -36,7 +36,7 @@ export default function Dashboard() {
         },
         {
             name: "Today's Expenses",
-            value: "$120",
+            value: "Rs. 120",
             change: "+5.1%",
             changeType: "increase",
             icon: AlertCircle,
@@ -118,8 +118,8 @@ export default function Dashboard() {
                         <h2 className="text-lg font-semibold opacity-90">Today's Net Profit</h2>
                         <DollarSign className="h-8 w-8 opacity-80" />
                     </div>
-                    <p className="text-4xl font-bold mb-2">$330</p>
-                    <p className="text-sm opacity-90">Sales: $450 - Expenses: $120</p>
+                    <p className="text-4xl font-bold mb-2">Rs. 330</p>
+                    <p className="text-sm opacity-90">Sales: Rs. 450 - Expenses: Rs. 120</p>
                     <div className="mt-4 pt-4 border-t border-green-400">
                         <p className="text-sm font-medium">Profit Margin: 73.3%</p>
                     </div>

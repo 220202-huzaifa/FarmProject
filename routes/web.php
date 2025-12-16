@@ -5,6 +5,7 @@ use App\Http\Controllers\MilkProductionController;
 use App\Http\Controllers\MilkSaleController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendingPaymentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +49,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/cows', function () {
         return Inertia::render('Cows');
     })->name('cows');
+    
+    Route::get('/pending-payments', [PendingPaymentController::class, 'index'])->name('pending-payments');
+    Route::get('/pending-payments/customer/{customerId}', [PendingPaymentController::class, 'customerDetail'])->name('pending-payments.customer');
+    Route::post('/pending-payments/customer', [PendingPaymentController::class, 'storeCustomer'])->name('pending-payments.customer.store');
+    Route::post('/pending-payments/milk-entry', [PendingPaymentController::class, 'storeMilkEntry'])->name('pending-payments.milk-entry.store');
+    Route::put('/pending-payments/milk-entry/{id}', [PendingPaymentController::class, 'updateMilkEntry'])->name('pending-payments.milk-entry.update');
+    Route::delete('/pending-payments/milk-entry/{id}', [PendingPaymentController::class, 'destroyMilkEntry'])->name('pending-payments.milk-entry.destroy');
+    Route::get('/pending-payments/report/{customerId}', [PendingPaymentController::class, 'downloadReport'])->name('pending-payments.report');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

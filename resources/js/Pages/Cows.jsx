@@ -83,134 +83,83 @@ export default function Cows() {
                                 </button>
                             </div>
                         </div>
-                        
                         <div className="p-6">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Cow Number <span className="text-red-500">*</span>
-                                    </label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Cow Number</label>
                                     <input
                                         type="text"
                                         value={newCow.number}
                                         onChange={(e) => setNewCow({...newCow, number: e.target.value})}
-                                        className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                        className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                                         placeholder="e.g., COW-004"
                                     />
                                 </div>
-                                
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Cow Name (Optional)
-                                    </label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Cow Name</label>
                                     <input
                                         type="text"
                                         value={newCow.name}
                                         onChange={(e) => setNewCow({...newCow, name: e.target.value})}
-                                        className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                                        placeholder="e.g., Rosie"
+                                        className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                        placeholder="e.g., Bessie"
                                     />
                                 </div>
-                                
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                                        Notes (Optional)
-                                    </label>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
                                     <input
                                         type="text"
                                         value={newCow.notes}
                                         onChange={(e) => setNewCow({...newCow, notes: e.target.value})}
-                                        className="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+                                        className="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                                         placeholder="Health notes..."
                                     />
                                 </div>
                             </div>
-                            
-                            <div className="flex justify-end space-x-3">
-                                <button
-                                    onClick={() => setShowAddForm(false)}
-                                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
-                                >
-                                    Cancel
-                                </button>
+                            <div className="mt-4 flex justify-end">
                                 <button
                                     onClick={handleAddCow}
-                                    disabled={!newCow.number}
-                                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 text-white rounded-lg transition-colors"
+                                    className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
                                 >
-                                    Save Cow
+                                    Add Cow
                                 </button>
                             </div>
                         </div>
                     </div>
                 )}
 
-                {/* Cow List Table */}
+                {/* Cows Table */}
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Cow Number
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Cow Name
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Status
-                                    </th>
-                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Actions
-                                    </th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cow Number</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
+                                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
-                                {filteredCows.length > 0 ? (
-                                    filteredCows.map((cow) => (
-                                        <tr key={cow.id} className="hover:bg-gray-50 transition-colors">
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {cow.number}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                {cow.name || '-'}
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                                                    cow.status === 'Active' 
-                                                        ? 'bg-green-100 text-green-800' 
-                                                        : 'bg-red-100 text-red-800'
-                                                }`}>
-                                                    {cow.status}
-                                                </span>
-                                            </td>
-                                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                <div className="flex items-center space-x-3">
-                                                    <button className="text-purple-600 hover:text-purple-900 flex items-center space-x-1">
-                                                        <Eye className="w-4 h-4" />
-                                                        <span>View</span>
-                                                    </button>
-                                                    <button className="text-blue-600 hover:text-blue-900 flex items-center space-x-1">
-                                                        <Edit2 className="w-4 h-4" />
-                                                        <span>Edit</span>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <tr>
-                                        <td colSpan="4" className="px-6 py-12 text-center">
-                                            <div className="flex flex-col items-center">
-                                                <Users className="w-12 h-12 text-gray-400 mb-4" />
-                                                <p className="text-gray-500">No cows found</p>
-                                                <p className="text-sm text-gray-400 mt-1">
-                                                    {searchTerm ? 'Try adjusting your search' : 'Add your first cow to get started'}
-                                                </p>
-                                            </div>
+                                {filteredCows.map((cow) => (
+                                    <tr key={cow.id} className="hover:bg-gray-50">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{cow.number}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{cow.name || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                                                cow.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                                            }`}>
+                                                {cow.status}
+                                            </span>
+                                        </td>
+                                        <td className="px-6 py-4 text-sm text-gray-500">{cow.notes || '-'}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button className="text-purple-600 hover:text-purple-900 mr-3">Edit</button>
+                                            <button className="text-red-600 hover:text-red-900">Delete</button>
                                         </td>
                                     </tr>
-                                )}
+                                ))}
                             </tbody>
                         </table>
                     </div>
